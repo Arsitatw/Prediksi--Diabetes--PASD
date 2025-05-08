@@ -10,7 +10,7 @@ class DiabetesApp:
         self.model.load_model("diabetes_model.pkl")  
         self.processor = DiabetesDataProcessor("diabetes.csv")
         self.processor.load_data()
-        self.processor.preprocess()  # Untuk scaler-nya
+        self.processor.preprocess()  
 
     def run(self):
         st.title("🩺 Prediksi Diabetes")
@@ -39,4 +39,8 @@ class DiabetesApp:
                 st.error("⚠️ Hasil Prediksi: Berisiko Diabetes")
             else:
                 st.success("✅ Hasil Prediksi: Tidak Berisiko Diabetes")
+                
+if __name__ == "__main__":
+    app = DiabetesApp()
+    app.run()
 
