@@ -24,6 +24,8 @@ class DiabetesDataProcessor:
         if self.data is None:
             raise ValueError("Data belum dimuat. Panggil load_data() dulu.")
         
+        self.data = self.data.drop(columns=['Pregnancies', 'SkinThickness'])
+        
         self.handle_zeros()
         X = self.data.drop("Outcome", axis=1)
         y = self.data["Outcome"]
