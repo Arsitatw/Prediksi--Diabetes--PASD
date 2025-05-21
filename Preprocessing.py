@@ -27,11 +27,11 @@ class DiabetesDataProcessor:
         self.data = self.data.drop(columns=['Pregnancies', 'SkinThickness'])
         
         self.handle_zeros()
-        X = self.data.drop("Outcome", axis=1)
-        y = self.data["Outcome"]
+        features = self.data.drop("Outcome", axis=1)
+        labels = self.data["Outcome"]
 
-        X_scaled = self.scaler.fit_transform(X)
-        return X_scaled, y
+        features_scaled = self.scaler.fit_transform(features)
+        return features_scaled, labels
 
     def transform_new_data(self, input_data):
         """Transformasi data input baru (1D array) ke bentuk terstandarisasi."""
@@ -40,8 +40,8 @@ class DiabetesDataProcessor:
 if __name__ == "__main__":
     processor = DiabetesDataProcessor("diabetes.csv")
     processor.load_data()
-    X_scaled, y = processor.preprocess()
-    print("X shape:", X_scaled.shape)
-    print("y distribusi:\n", y.value_counts())
+    features_scaled, labels = processor.preprocess()
+    print("Features shape:", features_scaled.shape)
+    print("Labels distribusi:\n", labels.value_counts())
 
 

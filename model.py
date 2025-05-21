@@ -11,15 +11,16 @@ class DiabetesModel:
         )
         self.trained = False
 
-    def train(self, X, y):
-        #Melatih model dan mengembalikan skor akurasi split data 80 training 20 testing
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-        self.model.fit(X_train, y_train)
-        y_pred = self.model.predict(X_test)
+    def train(self, features, labels):
+        features_train, features_test, labels_train, labels_test = train_test_split(
+            features, labels, test_size=0.2, random_state=42
+        )
+        self.model.fit(features_train, labels_train)
+        predictions = self.model.predict(features_test)
         self.trained = True
 
-        accuracy = accuracy_score(y_test, y_pred)
-        print("Classification Report:\n", classification_report(y_test, y_pred))
+        accuracy = accuracy_score(labels_test, predictions)
+        print("Classification Report:\n", classification_report(labels_test, predictions))
         return accuracy
 
     def predict(self, input_data):
