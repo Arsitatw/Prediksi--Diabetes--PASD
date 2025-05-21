@@ -4,6 +4,7 @@ from sklearn.metrics import accuracy_score, classification_report
 import joblib
 
 class DiabetesModel:
+    #inisialisai model
     def __init__(self):
         self.model = RandomForestClassifier(
             n_estimators=100, max_depth=10, random_state=42
@@ -11,7 +12,7 @@ class DiabetesModel:
         self.trained = False
 
     def train(self, X, y):
-        """Melatih model dan mengembalikan skor akurasi."""
+        #Melatih model dan mengembalikan skor akurasi split data 80 training 20 testing
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
         self.model.fit(X_train, y_train)
         y_pred = self.model.predict(X_test)
@@ -22,18 +23,18 @@ class DiabetesModel:
         return accuracy
 
     def predict(self, input_data):
-        """Melakukan prediksi terhadap data input tunggal."""
+        #Melakukan prediksi terhadap data yang di input dan memprediksi model
         if not self.trained:
             raise ValueError("Model belum dilatih. Muat atau latih model terlebih dahulu.")
         return self.model.predict([input_data])[0]
 
     def save_model(self, filepath):
-        """Simpan model ke file .pkl"""
+        #Simpan model ke file .pkl
         joblib.dump(self.model, filepath)
         print(f"Model disimpan ke {filepath}")
 
     def load_model(self, filepath):
-        """Muat model dari file .pkl"""
+        #Muat model dari file .pkl jika model di perlukan dan berhasil dilatih
         self.model = joblib.load(filepath)
         self.trained = True
         print(f"Model dimuat dari {filepath}")
