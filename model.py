@@ -5,12 +5,16 @@ import joblib
 
 class DiabetesModel:
     #inisialisai model
+    #Menggunakan RandomForestClassifier dari sklearn
     def __init__(self):
         self.model = RandomForestClassifier(
             n_estimators=100, max_depth=10, random_state=42
         )
         self.trained = False
 
+    # Melatih model
+    #Menggunakan train_test_split untuk membagi data latih dan data uji
+    #Menggunakan accuracy_score untuk menghitung akurasi
     def train(self, features, labels):
         features_train, features_test, labels_train, labels_test = train_test_split(
             features, labels, test_size=0.2, random_state=42
@@ -22,20 +26,26 @@ class DiabetesModel:
         accuracy = accuracy_score(labels_test, predictions)
         print("Classification Report:\n", classification_report(labels_test, predictions))
         return accuracy
-
+    
+    # Menghitung akurasi dari model
     def predict(self, input_data):
         #Melakukan prediksi terhadap data yang di input dan memprediksi model
         if not self.trained:
             raise ValueError("Model belum dilatih. Muat atau latih model terlebih dahulu.")
         return self.model.predict([input_data])[0]
 
+    # Menyimpan dan memuat model
+    #Menggunakan joblib untuk menyimpan model ke file .pkl
     def save_model(self, filepath):
         #Simpan model ke file .pkl
         joblib.dump(self.model, filepath)
         print(f"Model disimpan ke {filepath}")
 
+    # Muat model dari file .pkl
     def load_model(self, filepath):
         #Muat model dari file .pkl jika model di perlukan dan berhasil dilatih
         self.model = joblib.load(filepath)
         self.trained = True
         print(f"Model dimuat dari {filepath}")
+
+#coba
