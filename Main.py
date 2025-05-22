@@ -85,11 +85,14 @@ class DiabetesApp:
             input_scaled = self.processor.transform_new_data(input_data)
             result = self.model.predict(input_scaled[0])
 
-            # Tampilkan hasil prediksi
+            # Hitung probabilitas terkena diabetes
+            probability = self.model.model.predict_proba(input_scaled)[0][1] * 100  # dalam persen
+
+            # Tampilkan hasil prediksi dan probabilitas saja (tanpa akurasi)
             if result == 1:
-                st.error("⚠ Hasil Prediksi: Berisiko Diabetes")
+                st.error(f"⚠ Hasil Prediksi: Berisiko Diabetes\n\nPeluang terkena diabetes: {probability:.2f}%")
             else:
-                st.success("✅ Hasil Prediksi: Tidak Berisiko Diabetes")
+                st.success(f"✅ Hasil Prediksi: Tidak Berisiko Diabetes\n\nPeluang terkena diabetes: {probability:.2f}%")
 
 # Jalankan aplikasi
 if __name__ == "__main__":
