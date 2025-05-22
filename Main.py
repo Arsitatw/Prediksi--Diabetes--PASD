@@ -4,7 +4,8 @@ from model import DiabetesModel
 from Preprocessing import DiabetesDataProcessor
 
 class DiabetesApp:
-    def _init_(self):
+    def __init__(self):  
+        # Inisialisasi model dan preprocessing data
         self.model = DiabetesModel()
         self.model.load_model("diabetes_model.pkl")  
         self.processor = DiabetesDataProcessor("diabetes.csv")
@@ -12,18 +13,22 @@ class DiabetesApp:
         self.processor.preprocess()
 
     def run(self):
+        # Custom CSS untuk mempercantik tampilan aplikasi Streamlit
         st.markdown("""
         <style>
+        /* Mengatur font utama dan warna latar belakang aplikasi */
         html, body, [class*="css"]  {
             font-family: 'Arial Black', Gadget, sans-serif;
             background-color: #fefefe;
         }
+        /* Membuat border tebal dan bayangan pada kontainer utama */
         .block-container {
             border: 5px solid black;
             padding: 30px;
             background-color: #ffffff;
             box-shadow: 8px 8px 0px black;
         }
+        /* Header utama aplikasi dengan warna gradasi, border, dan bayangan */
         .main-header {
             color: #fff;
             background: linear-gradient(90deg, #00c3ff 0%, #ffff1c 100%);
@@ -36,6 +41,7 @@ class DiabetesApp:
             font-family: 'Arial Black', Gadget, sans-serif;
             letter-spacing: 2px;
         }
+        /* Subheader dengan warna kuning dan border hitam */
         h2 {
             color: black;
             background-color: #ffd500;
@@ -43,6 +49,7 @@ class DiabetesApp:
             border: 3px solid black;
             box-shadow: 4px 4px 0px black;
         }
+        /* Tampilan tombol prediksi agar lebih menarik */
         .stButton>button {
             color: black;
             background-color: #00ffff;
@@ -50,16 +57,20 @@ class DiabetesApp:
             box-shadow: 4px 4px 0px black;
             font-weight: bold;
         }
+        /* Border pada input angka agar lebih jelas */
         .stNumberInput>div>input {
             border: 2px solid black;
         }
         </style>
         """, unsafe_allow_html=True)
 
+        # Header aplikasi
         st.markdown('<div class="main-header">🧪 Prediksi Diabetes</div>', unsafe_allow_html=True)
 
+        # Subheader untuk input data pengguna
         st.subheader("Masukkan Data Pengguna")
 
+        # Input fitur dari pengguna
         glucose = st.number_input("🩸 Glukosa", min_value=0)
         blood_pressure = st.number_input("💓 Tekanan Darah", min_value=0)
         insulin = st.number_input("💉 Insulin", min_value=0)
@@ -67,16 +78,18 @@ class DiabetesApp:
         dpf = st.number_input("📊 Diabetes Pedigree Function", min_value=0.0)
         age = st.number_input("🎂 Umur", min_value=0)
 
+        # Tombol prediksi
         if st.button("🔍 Prediksi"):
+            # Gabungkan input menjadi array dan lakukan scaling
             input_data = np.array([glucose, blood_pressure, insulin, bmi, dpf, age])
             input_scaled = self.processor.transform_new_data(input_data)
             result = self.model.predict(input_scaled[0])
 
+            # Tampilkan hasil prediksi
             if result == 1:
                 st.error("⚠ Hasil Prediksi: Berisiko Diabetes")
             else:
                 st.success("✅ Hasil Prediksi: Tidak Berisiko Diabetes")
-
 
 # Jalankan aplikasi
 if __name__ == "__main__":
