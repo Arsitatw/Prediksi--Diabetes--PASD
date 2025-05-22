@@ -63,4 +63,4 @@ if __name__ == "__main__":
     processor.load_data()                                  # Load data dari CSV
     features_scaled, labels = processor.preprocess()       # Preprocessing data
     print("Features shape:", features_scaled.shape)        # Cetak dimensi fitur setelah scaling
-    print("Labels distribusi:\n", labels.value_counts())   # Tampilkan distribusi label 0 dan 1
+    print("Labels distribusi:\n", labels.value_counts())   # Tampilkan distribusi label 0-1
