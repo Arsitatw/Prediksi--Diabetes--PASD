@@ -28,18 +28,21 @@ class DiabetesApp:
             background-color: #ffffff;
             box-shadow: 8px 8px 0px black;
         }
-        /* Header utama aplikasi dengan warna gradasi, border, dan bayangan */
+       
+        /* Header utama aplikasi dengan warna biru polos, border, dan bayangan */
         .main-header {
-            color: #fff;
-            background: linear-gradient(90deg, #00c3ff 0%, #ffff1c 100%);
-            border: 4px solid #000;
-            box-shadow: 6px 6px 0px #000;
-            padding: 20px 0;
-            margin-bottom: 30px;
-            text-align: center;
-            font-size: 2.8em;
-            font-family: 'Arial Black', Gadget, sans-serif;
-            letter-spacing: 2px;
+         color: #fff;
+        background: #00c3ff; /* Warna biru polos */
+        border: 4px solid #000;
+        box-shadow: 6px 6px 0px #000;
+        padding: 20px 0;
+        margin-bottom: 30px;
+        text-align: center;
+        font-size: 2.8em;
+        font-family: 'Arial Black', Gadget, sans-serif;
+        letter-spacing: 2px;
+        }
+
         }
         /* Subheader dengan warna kuning dan border hitam */
         h2 {
