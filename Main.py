@@ -1,14 +1,14 @@
 import streamlit as st
 import numpy as np
-from model import DiabetesModel
-from Preprocessing import DiabetesDataProcessor
+from Models.model import DiabetesModel
+from Utils.Preprocessing import DiabetesDataProcessor
 
 class DiabetesApp:
     def __init__(self):  
         # Inisialisasi model dan preprocessing data
         self.model = DiabetesModel()
-        self.model.load_model("diabetes_model.pkl")  
-        self.processor = DiabetesDataProcessor("diabetes.csv")
+        self.model.load_model("Models/diabetes_model.pkl")  
+        self.processor = DiabetesDataProcessor("Dataset/diabetes.csv") 
         self.processor.load_data()
         self.processor.preprocess()
 
