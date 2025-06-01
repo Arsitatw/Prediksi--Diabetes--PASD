@@ -6,9 +6,14 @@ from sklearn.metrics import accuracy_score, classification_report
 import joblib
 
 class DiabetesModel:
+<<<<<<< HEAD:Models/model.py
     """
     Kelas untuk membangun, melatih, menyimpan, memuat, dan memprediksi model Random Forest untuk prediksi diabetes.
     """
+=======
+    #inisialisai model
+    #Menggunakan RandomForestClassifier dari sklearn
+>>>>>>> 0e6a26e3a22d3e22c7450e8673d1618acde66533:model.py
     def __init__(self):
         # Inisialisasi model Random Forest
         self.model = RandomForestClassifier(
@@ -16,6 +21,9 @@ class DiabetesModel:
         )
         self.trained = False
 
+    # Melatih model
+    #Menggunakan train_test_split untuk membagi data latih dan data uji
+    #Menggunakan accuracy_score untuk menghitung akurasi
     def train(self, features, labels):
         """
         Melatih model Random Forest dengan data fitur dan label.
@@ -32,7 +40,8 @@ class DiabetesModel:
         accuracy = accuracy_score(labels_test, predictions)
         print("Classification Report:\n", classification_report(labels_test, predictions))
         return accuracy
-
+    
+    # Menghitung akurasi dari model
     def predict(self, input_data):
         """
         Melakukan prediksi terhadap satu data input.
@@ -41,6 +50,7 @@ class DiabetesModel:
             raise ValueError("Model belum dilatih. Muat atau latih model terlebih dahulu.")
         return self.model.predict([input_data])[0]
 
+<<<<<<< HEAD:Models/model.py
     def predict_proba(self, input_data):
         """
         Mengembalikan probabilitas prediksi.
@@ -53,9 +63,16 @@ class DiabetesModel:
         """
         Menyimpan model ke file .pkl.
         """
+=======
+    # Menyimpan dan memuat model
+    #Menggunakan joblib untuk menyimpan model ke file .pkl
+    def save_model(self, filepath):
+        #Simpan model ke file .pkl
+>>>>>>> 0e6a26e3a22d3e22c7450e8673d1618acde66533:model.py
         joblib.dump(self.model, filepath)
         print(f"Model disimpan ke {filepath}")
 
+    # Muat model dari file .pkl
     def load_model(self, filepath):
         """
         Memuat model dari file .pkl.
@@ -63,3 +80,5 @@ class DiabetesModel:
         self.model = joblib.load(filepath)
         self.trained = True
         print(f"Model dimuat dari {filepath}")
+
+#coba
